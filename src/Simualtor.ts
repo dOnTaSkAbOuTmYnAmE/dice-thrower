@@ -6,6 +6,8 @@ export default class Simulator {
 	gapInput: HTMLInputElement
 	form: HTMLFormElement
 
+	light: HTMLDivElement
+
 	constructor(
 		canvas: HTMLCanvasElement,
 		numberInput: HTMLInputElement,
@@ -13,20 +15,25 @@ export default class Simulator {
 		throwsInput: HTMLInputElement,
 		gap: HTMLInputElement,
 		form: HTMLFormElement,
-		divv: HTMLDivElement
+		divv: HTMLDivElement,
+		light: HTMLDivElement
 	) {
 		this.numberInput = numberInput
 		this.diceInput = diceInput
 		this.throwsInput = throwsInput
 		this.gapInput = gap
 		this.form = form
+		this.light = light
 
 		this.form.addEventListener('submit', (e) => {
 			e.preventDefault()
+			this.light.style.setProperty('--light-bg', 'red')
+			this.light.innerText = 'Running'
 
-			this.simulate()
+			setTimeout(() => {
+				this.simulate()
+			}, 100)
 		})
-
 		this.canvas = new Canvas(canvas, divv)
 	}
 
@@ -64,7 +71,10 @@ export default class Simulator {
 			})
 		}
 
-		this.canvas.draw(thrwos_data, numCols, gap, 20)
+		this.canvas.draw(thrwos_data, numCols, gap, 48)
+
+		this.light.style.setProperty('--light-bg', 'greenyellow')
+		this.light.innerText = 'Done'
 	}
 
 	throwDices(): number {
@@ -132,8 +142,8 @@ export class Canvas {
 
 		let values: number[] = [...Object.values(thrwos_data)]
 
-		const maxHeight = Math.max(...values) - bottom_margin
-		const levelHeight = this.height / maxHeight / 1.4
+		const numLevels = Math.max(...values)
+		const levelHeight = (this.height - bottom_margin) / numLevels
 
 		if (this.context != null) {
 			this.context.clearRect(0, 0, this.width, this.height)
@@ -148,10 +158,11 @@ export class Canvas {
 					columnHeight
 				)
 
+				this.context.font = '16px Comic Sans MS'
 				this.context.fillText(
 					Object.keys(thrwos_data)[i],
-					columnWidth * i + gap * i,
-					this.height
+					columnWidth * i + gap * i + columnWidth / 2 - 8,
+					i % 2 == 1 ? this.height : this.height - bottom_margin / 2
 				)
 			}
 		}

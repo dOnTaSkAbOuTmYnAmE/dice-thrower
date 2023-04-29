@@ -19,8 +19,8 @@
 	place-content: center;
 }
 
-#display {
-}
+// #display {
+// }
 
 // panel
 .panel {
@@ -41,4 +41,30 @@ label {
 	flex-direction: row;
 	justify-content: space-between;
 	gap: 0.5em;
+}
+
+// Light
+.is-running {
+	font-size: 1.3em;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.light {
+	--light-bg: yellow;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.5em;
+}
+.light::after {
+	content: '';
+	display: inline-block;
+	width: 2em;
+	aspect-ratio: 1 / 1;
+	background-color: var(--light-bg);
+	border-radius: 50%;
+	border: 0.15em inset gray;
 }
