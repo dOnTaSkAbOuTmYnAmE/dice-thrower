@@ -1,0 +1,44 @@
+@import 'reset';
+
+:root {
+	// https://paletton.com/#uid=74v0D0khk++5E+Zce++m0+ZqR+r
+
+	--clr-primary-500: #a75eff;
+}
+
+#app {
+	height: 100vh;
+
+	display: grid;
+	grid-template-columns: 1fr auto;
+}
+
+// display
+.display {
+	display: grid;
+	place-content: center;
+}
+
+#display {
+}
+
+// panel
+.panel {
+	padding: 2em;
+
+	background-color: var(--clr-primary-500);
+
+	form {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 0.5em;
+	}
+}
+
+label {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 0.5em;
+}

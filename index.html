@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+
+    <script type="module" src="src/main.ts" defer></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="display">
+        <canvas id="display"></canvas>
+      </div>
+      
+      <div class="panel">
+
+        <form id="main">
+          <label>
+        Number of dices:
+        <input type="number" name="numod" id="numod" value="3">
+      </label>
+      <label>
+        Dice: D
+        <input type="number" name="dice" id="dice" value="6">
+      </label>
+      <label>
+        Number of throws
+        <input type="number" name="throws" id="throws" value="1000">
+      </label>
+        <button id="submit">
+          Calculate
+        </button>
+      </form>
+      
+      <form id="extras">
+        <label>
+          Gap:
+          <input type="number" name="gap" id="gap" value="5">
+        </label>
+      </form>
+    </div>
+    </div>
+  </body>
+</html>
