@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="public/images/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
 
@@ -15,40 +15,76 @@
       </div>
       
       <div class="panel">
+        <div class="hover-show"></div>
 
-        <form id="main">
-          <label>
-        Number of dices:
-        <input type="number" name="numod" id="numod" value="3">
-      </label>
-      <label>
-        Dice: D
-        <input type="number" name="dice" id="dice" value="6">
-      </label>
-      <label>
-        Number of throws
-        <input type="number" name="throws" id="throws" value="1000">
-      </label>
-        <button id="submit">
-          Calculate
+        <button class="toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+          <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+              <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
+          </svg>
         </button>
-      </form>
-      
-      <form id="extras">
-        <label>
-          Gap:
-          <input type="number" name="gap" id="gap" value="5">
-        </label>
-      </form>
-      <div class="is-running">
-        <span>
-          Status
-        </span>
-        <div class="light" id="light">
-          Waiting
+
+        <h1>
+          Dice Throws Data Simulato-Inator
+        </h1>
+
+        <div class="section" id="simulation">
+          <h2>
+            Simulation
+          </h2>
+          <form id="main">
+            <label>
+              Number of dices:
+              <input type="number" name="numod" id="numod" value="3" min="0">
+            </label>
+            <label>
+              Dice: D
+              <input type="number" name="dice" id="dice" value="6" min="0">
+            </label>
+            <label>
+              Number of throws
+              <input type="number" name="throws" id="throws" value="100" min="0">
+            </label>
+            <button id="submit">
+              Calculate
+            </button>
+          </form>
         </div>
-    </div>
-    </div>
+      
+        <div class="section" id="disection">
+          <h2>
+            Display
+          </h2>
+          <form id="extras">
+            <label>
+              Gap:
+              <input type="number" name="gap" id="gap" value="5">
+            </label>
+          </form>
+        </div>
+
+        <div class="section" id="status">
+          <h2>
+            Status
+          </h2>
+          <div class="grid 2-cols">
+            <div class="timeRunning">
+              <p>
+                Last simulation <span id="f-time">0s 00ms</span>
+              </p>
+            </div>
+            <div class="is-running">
+              <!-- <span>
+                Status
+              </span> -->
+              <div class="light" id="light">
+                Waiting
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </body>
 </html>

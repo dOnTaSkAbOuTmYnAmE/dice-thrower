@@ -1,3 +1,5 @@
+import Canvas from './Canvas'
+
 export default class Simulator {
 	canvas: Canvas
 	numberInput: HTMLInputElement
@@ -7,6 +9,9 @@ export default class Simulator {
 	form: HTMLFormElement
 
 	light: HTMLDivElement
+	timeDisp: HTMLSpanElement
+
+	options: PanelControlss
 
 	constructor(
 		canvas: HTMLCanvasElement,
@@ -16,14 +21,31 @@ export default class Simulator {
 		gap: HTMLInputElement,
 		form: HTMLFormElement,
 		divv: HTMLDivElement,
-		light: HTMLDivElement
+		light: HTMLDivElement,
+		running: HTMLSpanElement,
+		options?: PanelControlss
 	) {
+		if (options != null) {
+			this.options = options
+		} else {
+			this.options = {
+				bottomMargin: 20,
+				drawColor: 'black',
+				text: {
+					size: 16,
+					family: 'Comic Sans MS',
+					color: 'white',
+				},
+			}
+		}
+
 		this.numberInput = numberInput
 		this.diceInput = diceInput
 		this.throwsInput = throwsInput
 		this.gapInput = gap
 		this.form = form
 		this.light = light
+		this.timeDisp = running
 
 		this.form.addEventListener('submit', (e) => {
 			e.preventDefault()
@@ -38,6 +60,8 @@ export default class Simulator {
 	}
 
 	simulate() {
+		const startTime: number = Date.now()
+
 		const throws = +this.throwsInput.value
 		const num: number = +this.numberInput.value
 		const dice: number = +this.diceInput.value
@@ -71,10 +95,25 @@ export default class Simulator {
 			})
 		}
 
-		this.canvas.draw(thrwos_data, numCols, gap, 48)
+		this.canvas.draw(
+			thrwos_data,
+			numCols,
+			gap,
+			this.options.bottomMargin,
+			this.options.drawColor,
+			this.options.text
+		)
 
 		this.light.style.setProperty('--light-bg', 'greenyellow')
 		this.light.innerText = 'Done'
+
+		const finalTime = Date.now() - startTime
+
+		console.log(finalTime)
+		this.timeDisp.innerHTML = `${(finalTime / 1000)
+			.toFixed(2)
+			.split('.')
+			.join('s ')}ms`
 	}
 
 	throwDices(): number {
@@ -91,80 +130,16 @@ export default class Simulator {
 	}
 }
 
-export class Canvas {
-	canvas: HTMLCanvasElement
+export interface PanelControlss {
+	drawColor: string
+	bottomMargin: number
+	text: TextStyle
+}
 
-	rolls: { [numb: number]: number }
-
-	width: number
-	height: number
-
-	context: CanvasRenderingContext2D | null
-
-	constructor(canv: HTMLCanvasElement, parent: HTMLDivElement) {
-		this.canvas = canv
-
-		const wth = parent.getBoundingClientRect().width - 50
-
-		this.canvas.width = wth
-		this.canvas.height = (wth * 9) / 16
-
-		this.width = this.canvas.width
-		this.height = this.canvas.height
-
-		this.rolls = []
-
-		this.context = this.canvas.getContext('2d')
-
-		window.addEventListener('resize', () => {
-			const wth = parent.getBoundingClientRect().width - 50
-
-			this.canvas.width = wth
-			this.canvas.height = (wth * 9) / 16
-
-			this.width = this.canvas.width
-			this.height = this.canvas.height
-		})
-	}
-
-	draw(
-		thrwos_data: { [dist: string]: number },
-		columns: number,
-		gap: number,
-		bottom_margin: number
-	) {
-		const columnWidth = (this.width - (columns - 1) * gap) / columns
-
-		console.log('-------------------------------')
-		console.log(columnWidth)
-		console.log(columnWidth * columns)
-		console.log(columnWidth * columns + (columns - 1) * gap)
-
-		let values: number[] = [...Object.values(thrwos_data)]
-
-		const numLevels = Math.max(...values)
-		const levelHeight = (this.height - bottom_margin) / numLevels
-
-		if (this.context != null) {
-			this.context.clearRect(0, 0, this.width, this.height)
-			for (let i = 0; i < values.length; i++) {
-				const columnHeight = levelHeight * values[i]
-
-				this.context.fillStyle = 'black'
-				this.context.fillRect(
-					columnWidth * i + gap * i,
-					this.height - columnHeight - bottom_margin,
-					columnWidth,
-					columnHeight
-				)
-
-				this.context.font = '16px Comic Sans MS'
-				this.context.fillText(
-					Object.keys(thrwos_data)[i],
-					columnWidth * i + gap * i + columnWidth / 2 - 8,
-					i % 2 == 1 ? this.height : this.height - bottom_margin / 2
-				)
-			}
-		}
-	}
+export interface TextStyle {
+	size: number
+	color: string
+	family: string
+	bold?: boolean
+	italic?: boolean
 }
