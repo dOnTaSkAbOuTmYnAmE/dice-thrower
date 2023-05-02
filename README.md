@@ -10,8 +10,6 @@ The graphs ain't perfect
 
 More things are (probably) not gonna be added as I'm gonna forget about this project and move to another one
 
-So
-
-## HAVE FUN
+## So HAVE FUN
 
 destroying it and looking for bugs :)
