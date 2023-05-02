@@ -7,13 +7,16 @@ export default class Canvas {
 
 	width: number
 	height: number
+	margin: number
 
 	context: CanvasRenderingContext2D | null
 
 	constructor(canv: HTMLCanvasElement, parent: HTMLDivElement) {
 		this.canvas = canv
 
-		const wth = parent.getBoundingClientRect().width - 50
+		this.margin = 64
+
+		const wth = parent.getBoundingClientRect().width - this.margin
 
 		this.canvas.width = wth
 		this.canvas.height = (wth * 9) / 16
@@ -26,7 +29,7 @@ export default class Canvas {
 		this.context = this.canvas.getContext('2d')
 
 		window.addEventListener('resize', () => {
-			const wth = parent.getBoundingClientRect().width - 50
+			const wth = parent.getBoundingClientRect().width - this.margin
 
 			this.canvas.width = wth
 			this.canvas.height = (wth * 9) / 16

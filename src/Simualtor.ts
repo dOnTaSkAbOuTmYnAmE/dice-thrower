@@ -57,6 +57,8 @@ export default class Simulator {
 			}, 100)
 		})
 		this.canvas = new Canvas(canvas, divv)
+
+		window.addEventListener('resize', () => {})
 	}
 
 	simulate() {

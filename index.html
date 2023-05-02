@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="public/images/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Dice Thrower</title>
 
     <script type="module" src="src/main.ts" defer></script>
   </head>
@@ -16,7 +16,7 @@
       
       <div class="panel">
         <div class="hover-show"></div>
-
+        
         <button class="toggle">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
           <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -24,66 +24,95 @@
           </svg>
         </button>
 
-        <h1>
-          Dice Throws Data Simulato-Inator
-        </h1>
+        <div class="wrapper">
+  
+          <header>
+            <h1>
+            Dice Throws Data <br>
+            Simulato-Inator
+          </h1>
+          <p>
+            Use at your own risk!
+          </p>
+          </header>
+  
+          <section class="section" id="simulation">
+            <h2>
+              Simulation
+            </h2>
+            <form id="main">
+              <label>
+                <span>Number of dices:</span>
+                <input type="number" name="numod" id="numod" value="3" min="0">
+              </label>
+              <label>
+                <span>Dice:</span>
+                <input type="number" name="dice" id="dice" value="6" min="0">
+              </label>
+              <label>
+                <span>Number of throws</span>
+                <input type="number" name="throws" id="throws" value="1000" min="0">
+              </label>
+              <button id="submit" class="glow">
+                Calculate
 
-        <div class="section" id="simulation">
-          <h2>
-            Simulation
-          </h2>
-          <form id="main">
-            <label>
-              Number of dices:
-              <input type="number" name="numod" id="numod" value="3" min="0">
-            </label>
-            <label>
-              Dice: D
-              <input type="number" name="dice" id="dice" value="6" min="0">
-            </label>
-            <label>
-              Number of throws
-              <input type="number" name="throws" id="throws" value="100" min="0">
-            </label>
-            <button id="submit">
-              Calculate
-            </button>
-          </form>
-        </div>
-      
-        <div class="section" id="disection">
-          <h2>
-            Display
-          </h2>
-          <form id="extras">
-            <label>
-              Gap:
-              <input type="number" name="gap" id="gap" value="5">
-            </label>
-          </form>
-        </div>
-
-        <div class="section" id="status">
-          <h2>
-            Status
-          </h2>
-          <div class="grid 2-cols">
-            <div class="timeRunning">
-              <p>
-                Last simulation <span id="f-time">0s 00ms</span>
-              </p>
-            </div>
-            <div class="is-running">
-              <!-- <span>
-                Status
-              </span> -->
-              <div class="light" id="light">
-                Waiting
+                <svg class="glow-container">
+                  <rect pathLength="100" stroke-linecap="round" class="glow-blur"></rect>
+                  <rect pathLength="100" stroke-linecap="round" class="glow-line"></rect>
+                </svg>
+              </button>
+            </form>
+          </section>
+        
+          <section class="section" id="disection">
+            <h2>
+              Display
+            </h2>
+            <form id="extras">
+              <label>
+                <span>Gap:</span>
+                <input type="number" name="gap" id="gap" value="5">
+              </label>
+              <!-- <label>
+                Bottom Margin:
+                <input type="number" name="gap" id="gap" value="48">
+              </label> -->
+            </form>
+          </section>
+  
+          <section class="section">
+            <!-- <h2>
+              Status
+            </h2> -->
+            <div id="status">
+              <div class="timeRunning">
+                <p>
+                  Last simulation <span id="f-time">0s 00ms</span>
+                </p>
+              </div>
+              <div class="is-running">
+                <!-- <span>
+                  Status
+                </span> -->
+                <div class="light" id="light">
+                  Waiting
+                </div>
               </div>
             </div>
-          </div>
+          </section>
+  
+          <section class="section how-dis-work">
+            <h2>
+              How does this work?
+            </h2>
+            <p class="joking">
+              A few dozen gnomes throw given dices and write down results, then give them to math wizards that then with some magic creates the graph you see
+            </p>
+            <p class="serious">
+              But all joking aside that is pretty much how it works. First numbers between 1 & &lt;Dice&gt; are generated &lt;Number of dice &gt; times and summed up. Then it is repeated &lt;Number of throws&gt; times, the data is saved and displayed
+            </p>
+          </section>
         </div>
-
       </div>
     </div>
   </body>
