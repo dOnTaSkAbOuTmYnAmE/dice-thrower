@@ -2,7 +2,7 @@
 
 Ya put in some numbers, ya get some graphs.
 
-If ye wanna simulate 1 million quadrillion bizillion throws, then good luck waiting, but should be good up to a 10_000_000
+If ye wanna simulate 1 million quadrillion bizillion throws, then good luck waiting, but should be good up to a 10_000_000 (Might take a few minutes though)
 
 ## ALSO
 
